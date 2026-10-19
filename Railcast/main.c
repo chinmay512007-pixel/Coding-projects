@@ -24,13 +24,18 @@ int main(void){
         printf("Invalid input\n");
         return 1;
     }
+    if(distance==0){
+        printf("The train has arrived");
+        return 0;
+    }
     printf("Enter avg.speed in kmph: ");
     if(scanf("%lf",&speed)!=1){
         printf("Invalid input\n");
         return 1;
     }
+    
     double time= calculate_travel_time(distance, speed);
-    if(time<=0){
+    if(time<0){
         printf("Invalid condition");
     }
     else{
