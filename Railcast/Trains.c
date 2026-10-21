@@ -32,8 +32,8 @@ void initialize_trains(struct Train trains[]){
         12124, "Deccan Queen", "Pune", "Mumbai", 0, CANCELLED
     };
 }
-int find_train_using_id(struct Train trains[], int id){
-    for(int i=0; i<Train_count; i++){
+int find_train_using_id(struct Train trains[], int count, int id){
+    for(int i=0; i<count; i++){
         if (trains[i].id==id){
             return i;
         }

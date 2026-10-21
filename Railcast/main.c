@@ -1,19 +1,25 @@
 #include <stdio.h>
 #include "Trains.h"
 #include "ETA.h"
+#include "file_handler.h"
+
 int main(void){
     int train_id;
     double distance=0;
     double speed=0;
-    struct Train trains[Train_count];
-    initialize_trains(trains);
+    struct Train trains[max_count];
+    int loaded_count =load_trains_from_file(trains, "data/Train.txt");
+    if(loaded_count<=0){  
+        printf("Could not load train records\n");
+        return 1;
+    }
     printf("---Welcome To RailCast---\n");
     printf("Enter Train Id : ");
     if(scanf("%d", &train_id)!=1){
         printf("Invalid Input\n");
         return 1;
     }
-    train_id=find_train_using_id(trains, train_id);
+    train_id=find_train_using_id(trains, loaded_count, train_id);
     if(train_id==-1){
         printf("Train not found\n");
         return 1;
@@ -39,8 +45,8 @@ int main(void){
         printf("Invalid condition");
     }
     else{
-        printf("The estimated time in hours is %2f \n",time);
-        printf("The estimated time in minutes is %2f ",time*60);
+        double req_time= calculate_arrival_time(time, trains[train_id].delay_minutes);
+        printf("The estimated time in minutes is %2f ",req_time);
     }
     return 0;
 }

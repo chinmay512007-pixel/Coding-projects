@@ -1,6 +1,6 @@
 #ifndef TRAINS_H
 #define TRAINS_H
-#define Train_count 3
+#define max_count 100
 //Defining the train status enum
 enum TrainStatus{
     ON_TIME,
@@ -17,4 +17,5 @@ struct Train {
 };
 void initialize_trains(struct Train trains[]);
 void display_train_information(struct Train train);
+int find_train_using_id(struct Train trains[], int count, int id);
 #endif // TRAINS_H
